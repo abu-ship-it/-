@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flex 布局练习（学生版）· 移动端课程页</title>
+<style>
+  /* ========== 基础样式：已给出，请勿修改 ========== */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #eceef2; color: #1f2328; line-height: 1.5;
+    display: flex; justify-content: center;
+    padding: 16px;
+  }
+  .wrap { width: 100%; max-width: 420px; }
+
+  .task-card {
+    background: #fff; border-radius: 14px; padding: 16px 18px; margin-bottom: 14px;
+    font-size: 13px; color: #374151;
+  }
+  .task-card h2 { font-size: 15px; font-weight: 500; color: #111827; margin-bottom: 8px; }
+  .task-card ol { padding-left: 18px; }
+  .task-card li { margin-bottom: 6px; }
+  .task-card .hint { color: #6b7280; font-size: 12px; margin-top: 10px; }
+
+  .phone { background: #fff; border-radius: 18px; overflow: hidden; }
+
+  .app-bar { padding: 14px 16px; background: #2563eb; color: #fff; }
+  .app-bar h1 { font-size: 16px; font-weight: 500; }
+  .avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(255,255,255,.28); font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .section { padding: 16px; }
+  .section-title { font-size: 13px; color: #6b7280; margin-bottom: 10px; }
+
+  .stats { }
+  .stat { background: #f3f4f6; border-radius: 12px; padding: 14px 8px; }
+  .stat .num { font-size: 20px; font-weight: 500; color: #2563eb; }
+  .stat .label { font-size: 12px; color: #6b7280; }
+
+  .lesson-list { }
+  .lesson { background: #f9fafb; border: 1px solid #eceef2; border-radius: 12px; padding: 12px; }
+  .lesson-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: #dbeafe; color: #1d4ed8; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lesson-info { }
+  .lesson-info .name { font-size: 14px; }
+  .lesson-info .teacher { font-size: 12px; color: #6b7280; }
+  .lesson-time { font-size: 12px; color: #9ca3af; }
+
+  .tabbar { border-top: 1px solid #eceef2; padding: 10px 0; background: #fff; }
+  .tab { }
+  .tab .ico { width: 22px; height: 22px; border-radius: 6px; background: #eceef2; }
+  .tab .txt { font-size: 11px; color: #6b7280; }
+  .tab.active .ico { background: #2563eb; }
+  .tab.active .txt { color: #2563eb; }
+
+  /* ========== 作答区：只改下面带 TODO 的 7 处 ========== */
+
+  /* TODO 1 顶栏：标题在左、头像在右，两者垂直居中 */
+  .app-bar { display: flex; justify-content: space-between; align-items: center; }
+
+  /* TODO 2 三张统计卡横向排成一行，卡片之间留 10px 间距 */
+  .stats { display: flex; gap: 10px; }
+
+  /* TODO 3 每张统计卡：内部「数字」在上、「文字」在下，都水平居中，间距 4px */
+  .stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+
+  /* TODO 4 统计卡本身要三者等宽，平分一整行 */
+  .stat { flex: 1; }
+
+  /* TODO 5 课程列表：纵向排列，卡片之间间距 10px */
+  .lesson-list { display: flex; flex-direction: column; gap: 10px; }
+
+  /* TODO 6 单个课程卡片：图标 + 文字 + 时间 横向排列并垂直居中，间距 12px；
+            中间文字区域占满剩余宽度，且加 min-width:0 防止撑破 */
+  .lesson { display: flex; align-items: center; gap: 12px; }
+  .lesson-info { flex: 1; min-width: 0; }
+
+  /* TODO 7 底部导航：4 个 tab 横向等分；每个 tab 内部「图标在上、文字在下」居中 */
+  .tabbar { display: flex; }
+  .tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="task-card">
+    <h2>任务：用 Flex 完成一个移动端课程页</h2>
+    <p>打开本文件，只修改 style 中带 <b>TODO</b> 的空选择器，不要改动 HTML 结构。完成后页面应在手机宽度下正常显示，拉宽窗口后自动变成两列。</p>
+    <ol>
+      <li>顶栏：两端对齐、垂直居中</li>
+      <li>统计区：三卡一行、等宽、间距 10px</li>
+      <li>统计卡内部：纵向排列并居中</li>
+      <li>课程列表：纵向排列、间距 10px</li>
+      <li>课程卡片：图标 / 文字 / 时间 横向对齐，文字区自适应占满</li>
+      <li>底部导航：4 项等分，图标在上文字在下</li>
+    </ol>
+    <p class="hint">提示：先判断「主轴是哪一根」，再决定用 justify-content 还是 align-items。</p>
+  </div>
+
+  <div class="phone">
+    <div class="app-bar">
+      <h1>我的课程</h1>
+      <div class="avatar">李</div>
+    </div>
+
+    <div class="section">
+      <p class="section-title">本周概览</p>
+      <div class="stats">
+        <div class="stat"><span class="num">6</span><span class="label">已修学分</span></div>
+        <div class="stat"><span class="num">3</span><span class="label">待交作业</span></div>
+        <div class="stat"><span class="num">92%</span><span class="label">出勤率</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p class="section-title">今日课程</p>
+      <div class="lesson-list">
+        <div class="lesson">
+          <div class="lesson-icon">网</div>
+          <div class="lesson-info">
+            <p class="name">网页设计与制作</p>
+            <p class="teacher">王敏 · A302</p>
+          </div>
+          <span class="lesson-time">08:00</span>
+        </div>
+        <div class="lesson">
+          <div class="lesson-icon">数</div>
+          <div class="lesson-info">
+            <p class="name">数据库原理</p>
+            <p class="teacher">张伟 · B105</p>
+          </div>
+          <span class="lesson-time">10:10</span>
+        </div>
+        <div class="lesson">
+          <div class="lesson-icon">程</div>
+          <div class="lesson-info">
+            <p class="name">程序设计基础</p>
+            <p class="teacher">陈静 · A208</p>
+          </div>
+          <span class="lesson-time">14:00</span>
+        </div>
+        <div class="lesson">
+          <div class="lesson-icon">英</div>
+          <div class="lesson-info">
+            <p class="name">专业英语</p>
+            <p class="teacher">刘洋 · C401</p>
+          </div>
+          <span class="lesson-time">16:20</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabbar">
+      <div class="tab active"><div class="ico"></div><span class="txt">课程</span></div>
+      <div class="tab"><div class="ico"></div><span class="txt">作业</span></div>
+      <div class="tab"><div class="ico"></div><span class="txt">成绩</span></div>
+      <div class="tab"><div class="ico"></div><span class="txt">我的</span></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
